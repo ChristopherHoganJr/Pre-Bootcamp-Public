@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="background">
+      <div
+        id="character"
+        style="
+          position: absolute;
+          top: 100px;
+          left: 450px;
+          background-image: url('img/down1.png');
+          width: 59px;
+          height: 86px;
+        "
+      ></div>
+    </div>
+    <script type="text/javascript">
+      var xValue = 450,
+        yValue = 100;
+      function update() {
+        document.getElementById('character').style.left = xValue + 'px';
+        document.getElementById('character').style.top = yValue + 'px';
+      }
+      document.onkeydown = function (e) {
+        console.log(e);
+        //console.log('x: ' + xValue + ' | y: ' + yValue);
+        // left arrow
+        if (e.keyCode == 37 && xValue > 0) {
+          xValue -= 10;
+        }
+        // right arrow
+        else if (e.keyCode == 39 && xValue < 500) {
+          xValue += 10;
+        }
+        // down arrow
+        else if (e.keyCode == 40 && yValue < 500) {
+          yValue += 10;
+        }
+        // up arrow
+        else if (e.keyCode == 38 && yValue > 0) {
+          yValue -= 10;
+        }
+        update();
+      };
+    </script>
+  </body>
+</html>

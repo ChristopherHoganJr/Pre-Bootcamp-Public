@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="background">
+      <div
+        id="character"
+        style="
+          position: absolute;
+          top: 100px;
+          left: 450px;
+          background-image: url('img/down1.png');
+          width: 59px;
+          height: 86px;
+        "
+      ></div>
+    </div>
+    <script type="text/javascript">
+      // horizontal movement
+      var xValue = 450;
+      // vertical movement
+      var yValue = 100;
+      // default direction position
+      var direction = 'down';
+      // initialize step
+      var step = 1;
+      // update the position and image of character
+      function update() {
+        // change step version of character
+        if (step == 1) {
+          step = 2;
+        } else {
+          step = 1;
+        }
+        // set the horizontal position of character
+        document.getElementById('character').style.left = xValue + 'px';
+        // set the vertical position of character
+        document.getElementById('character').style.top = yValue + 'px';
+        // set image of the character
+        document.getElementById('character').style.backgroundImage =
+          "url('img/" + direction + step + ".png')";
+      }
+      document.onkeydown = function (e) {
+        //// Testing
+        //console.log(e);
+        //console.log('x: ' + xValue + ' | y: ' + yValue);
+        console.log(step);
+        // left arrow
+        if (e.keyCode == 37 && xValue > 0) {
+          // subtract 10 pixels from left css attribute
+          xValue -= 10;
+          if (direction != 'left') {
+            direction = 'left';
+          }
+        }
+        // right arrow
+        else if (e.keyCode == 39 && xValue < 500) {
+          // add 10 pixels from left css attribute
+          xValue += 10;
+          if (direction != 'right') {
+            direction = 'right';
+          }
+        }
+        // down arrow
+        else if (e.keyCode == 40 && yValue < 500) {
+          // add 10 pixels from top css attribute
+          yValue += 10;
+          if (direction != 'down') {
+            direction = 'down';
+          }
+        }
+        // up arrow
+        else if (e.keyCode == 38 && yValue > 0) {
+          // subtract 10 pixels from top css attribute
+          yValue -= 10;
+          if (direction != 'top') {
+            direction = 'top';
+          }
+        }
+        update();
+      };
+    </script>
+  </body>
+</html>
