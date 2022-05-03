@@ -4,8 +4,13 @@ var player = {
 };
 
 var enemies = [
+  { left: 150, top: 200 },
+  { left: 250, top: 200 },
   { left: 350, top: 200 },
-  { left: 450, top: 250 },
+  { left: 450, top: 200 },
+  { left: 550, top: 200 },
+  { left: 650, top: 200 },
+  { left: 750, top: 200 },
 ];
 
 function drawPlayer() {
@@ -19,22 +24,36 @@ function drawPlayer() {
 }
 drawPlayer();
 
+function drawEnemies() {
+  content = '';
+  for (var idx = 0; idx < enemies.length; idx++) {
+    content +=
+      "<div class='enemy' style='left:" +
+      enemies[idx].left +
+      'px; top:' +
+      enemies[idx].top +
+      "px;'></div>";
+  }
+  document.getElementById('enemies').innerHTML = content;
+}
+drawEnemies();
+
 // player movement
 document.onkeydown = function (e) {
   // move left
-  if (e.keyCode == 37) {
+  if (e.keyCode == 37 && player.left > 10) {
     player.left -= 10;
   }
   // move right
-  else if (e.keyCode == 39) {
+  else if (e.keyCode == 39 && player.left < 830) {
     player.left += 10;
   }
   // move up
-  else if (e.keyCode == 38) {
+  else if (e.keyCode == 38 && player.top > 10) {
     player.top -= 10;
   }
   // move down
-  else if (e.keyCode == 40) {
+  else if (e.keyCode == 40 && player.top < 620) {
     player.top += 10;
   }
   // redraw player on map
