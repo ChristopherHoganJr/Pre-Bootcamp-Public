@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+  .game {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: lightblue;
+  }
+  #gameboard {
+    position: relative;
+  }
+  h1 {
+    font-size: 5rem;
+  }
+  #scoreboard {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: blue;
+  }
+  .row {
+    line-height: 0;
+  }
+  .square {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+  }
+  .wall {
+    background-color: blue;
+  }
+  .sushi {
+    background-color: black;
+    background-image: url('../img/sushi.png');
+    background-size: contain;
+  }
+  .onigiri {
+    background-color: black;
+    background-image: url('../img/onigiri.png');
+    background-size: contain;
+  }
+  .blank {
+    background-color: black;
+  }
+  #ninjaman {
+    background-color: black;
+    background-image: url('../img/ninja.gif');
+    background-size: contain;
+    position: absolute;
+  }
+  #bluey {
+    background-color: black;
+    background-image: url('../img/bluey.gif');
+    background-size: contain;
+    position: absolute;
+  }
+  #pinky {
+    background-color: black;
+    background-image: url('../img/pinky.gif');
+    background-size: contain;
+    position: absolute;
+  }
+  #pumpky {
+    background-color: black;
+    background-image: url('../img/pumpky.gif');
+    background-size: contain;
+    position: absolute;
+  }
+  #red {
+    background-color: black;
+    background-image: url('../img/red.gif');
+    background-size: contain;
+    position: absolute;
+  }
+  #scaredy {
+    background-color: black;
+    background-image: url('../img/scaredy.gif');
+    background-size: contain;
+    position: absolute;
+  }
