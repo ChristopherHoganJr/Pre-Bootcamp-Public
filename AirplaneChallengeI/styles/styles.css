@@ -1,0 +1,11 @@
+#ocean {
+  background-image: url('../img/ocean.jpg');
+  width: 900px;
+  height: 700px;
+}
+.player {
+  position: absolute;
+  width: 70px;
+  height: 75px;
+  background-image: url('../img/player.png');
+}
