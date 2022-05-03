@@ -4,7 +4,6 @@ var player = {
 };
 
 var enemies = [
-  { left: 150, top: 200 },
   { left: 250, top: 200 },
   { left: 350, top: 200 },
   { left: 450, top: 200 },
