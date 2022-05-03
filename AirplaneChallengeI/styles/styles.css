@@ -9,3 +9,9 @@
   height: 75px;
   background-image: url('../img/player.png');
 }
+.enemy {
+  position: absolute;
+  width: 70px;
+  height: 75px;
+  background-image: url('../img/enemy.png');
+}
