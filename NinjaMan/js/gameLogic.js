@@ -112,7 +112,7 @@ var enemyList = [
   ['red', red],
 ];
 
-function enemyLocations() {
+function enemySpawnLocations() {
   for (var enemy = 0; enemy < enemyList.length; enemy++) {
     var enemyName = enemyList[enemy][0];
     console.log(enemyList[enemy][1][0]);
@@ -135,7 +135,7 @@ function drawNinjaman() {
 }
 // run the drawNinjaman function
 drawNinjaman();
-enemyLocations();
+enemySpawnLocations();
 // when an arrow key is pressed
 document.onkeydown = function (e) {
   // when the left arrow key is pressed
