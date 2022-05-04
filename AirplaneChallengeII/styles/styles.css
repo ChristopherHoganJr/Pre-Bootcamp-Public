@@ -15,3 +15,9 @@
   height: 75px;
   background-image: url('../img/newEnemy.png');
 }
+.missile {
+  width: 2px;
+  height: 10px;
+  position: absolute;
+  background-color: yellow;
+}
