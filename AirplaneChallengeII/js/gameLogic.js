@@ -21,7 +21,6 @@ function drawPlayer() {
     "px;'></div>";
   document.getElementById('players').innerHTML = content;
 }
-drawPlayer();
 
 function drawEnemies() {
   content = '';
@@ -35,7 +34,21 @@ function drawEnemies() {
   }
   document.getElementById('enemies').innerHTML = content;
 }
-drawEnemies();
+
+function moveEnemies() {
+  for (var idx = 0; idx < enemies.length; idx++) {
+    enemies[idx].top = enemies[idx].top + 5;
+  }
+}
+
+function gameLoop() {
+  drawPlayer();
+  moveEnemies();
+  drawEnemies();
+
+  setTimeout(gameLoop, 1000);
+}
+gameLoop();
 
 // player movement
 document.onkeydown = function (e) {
