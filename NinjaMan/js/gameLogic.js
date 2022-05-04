@@ -19,20 +19,7 @@ function drawScore() {
     '</p>';
 }
 drawScore();
-// static world game board
-/*var world = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-];*/
+
 // dynamic world game board
 var world = [];
 var dynamicRow = [];
@@ -80,8 +67,7 @@ function drawWorld() {
     // for every item in row array
     for (var x = 0; x < world[row].length; x++) {
       // add 1 div with class to create game path
-      output +=
-        "<div class='square " + worldDict[world[row][x]] + "'></div>";
+      output += "<div class='square " + worldDict[world[row][x]] + "'></div>";
     }
     // adds closing tag to div
     output += '</div>';
@@ -93,10 +79,11 @@ function drawWorld() {
 drawWorld();
 
 function enemySpawn() {
-  let yCord = Math.floor(Math.random() * 8) + 6;
+  // Put enemies on the opposite side from player
   let xCord = Math.floor(Math.random() * 8) + 6;
+  let yCord = Math.floor(Math.random() * 8) + 6;
 
-  return [yCord, xCord];
+  return [xCord, yCord];
 }
 
 // enemy spawn locations
@@ -112,14 +99,13 @@ var enemyList = [
   ['red', red],
 ];
 
-function enemySpawnLocations() {
+function drawEnemies() {
   for (var enemy = 0; enemy < enemyList.length; enemy++) {
     var enemyName = enemyList[enemy][0];
-    console.log(enemyList[enemy][1][0]);
     document.getElementById(enemyName).style.top =
-      enemyList[enemy][1][0] * 40 + 'px';
-    document.getElementById(enemyName).style.left =
       enemyList[enemy][1][1] * 40 + 'px';
+    document.getElementById(enemyName).style.left =
+      enemyList[enemy][1][0] * 40 + 'px';
   }
 }
 
@@ -128,6 +114,7 @@ var ninjaman = {
   x: 1,
   y: 1,
 };
+
 // How ninjaman will move
 function drawNinjaman() {
   document.getElementById('ninjaman').style.top = ninjaman.y * 40 + 'px';
@@ -135,7 +122,37 @@ function drawNinjaman() {
 }
 // run the drawNinjaman function
 drawNinjaman();
-enemySpawnLocations();
+drawEnemies();
+
+// enemies follow ninjaman
+function moveEnemies() {
+  for (var idx = 0; idx < enemyList.length; idx++) {
+    console.log(enemyList[idx][1][1]);
+    if (
+      ninjaman.y < enemyList[idx][1][1] &&
+      world[enemyList[idx][1][1] - 1][enemyList[idx][1][0]] != 0
+    ) {
+      enemyList[idx][1][1] = enemyList[idx][1][1] - 1;
+    } else if (
+      ninjaman.y > enemyList[idx][1][1] &&
+      world[enemyList[idx][1][1] + 1][enemyList[idx][1][0]] != 0
+    ) {
+      enemyList[idx][1][1] = enemyList[idx][1][1] + 1;
+    }
+    if (
+      ninjaman.x > enemyList[idx][1][1] &&
+      world[enemyList[idx][1][1]][enemyList[idx][1][0] + 1] != 0
+    ) {
+      enemyList[idx][1][0] = enemyList[idx][1][0] + 1;
+    } else if (
+      ninjaman.x < enemyList[idx][1][1] &&
+      world[enemyList[idx][1][1]][enemyList[idx][1][0] - 1] != 0
+    ) {
+      enemyList[idx][1][0] = enemyList[idx][1][0] - 1;
+    }
+  }
+}
+
 // when an arrow key is pressed
 document.onkeydown = function (e) {
   // when the left arrow key is pressed
@@ -170,7 +187,7 @@ document.onkeydown = function (e) {
       ninjaman.y--;
     }
   }
-  //
+
   if (world[ninjaman.y][ninjaman.x] == 2) {
     sushiEaten++;
   } else if (world[ninjaman.y][ninjaman.x] == 3) {
@@ -178,10 +195,13 @@ document.onkeydown = function (e) {
   }
   // turn spaces ninjaman has walked on black
   world[ninjaman.y][ninjaman.x] = 1;
+
   drawScore();
+
   // redraw ninjaman at new cordinates
   drawNinjaman();
+  moveEnemies();
+  drawEnemies();
   // redraw world to reflect what has happened
   drawWorld();
-  enemyLocations();
 };
