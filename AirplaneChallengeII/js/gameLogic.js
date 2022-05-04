@@ -5,11 +5,10 @@ var player = {
 
 var enemies = [
   { left: 250, top: 200 },
-  { left: 350, top: 200 },
-  { left: 450, top: 200 },
-  { left: 550, top: 200 },
-  { left: 650, top: 200 },
-  { left: 750, top: 200 },
+  { left: 350, top: 300 },
+  { left: 450, top: 250 },
+  { left: 550, top: 100 },
+  { left: 650, top: 170 },
 ];
 
 var missiles = [];
@@ -52,7 +51,9 @@ function drawMissiles() {
 
 function moveEnemies() {
   for (var idx = 0; idx < enemies.length; idx++) {
-    enemies[idx].top = enemies[idx].top + 3;
+    if (enemies[idx].top < 500) {
+      enemies[idx].top = enemies[idx].top + 3;
+    }
   }
 }
 
